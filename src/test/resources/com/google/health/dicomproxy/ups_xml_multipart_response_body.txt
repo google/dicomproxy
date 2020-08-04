@@ -1,0 +1,109 @@
+--BoUndaRy
+Content-Type: application/dicom+xml
+
+<?xml version="1.0" encoding="UTF-8"?><NativeDicomModel xml:space="preserve">
+  <!-- This entry represents the full set of tags this proxy is expected to support. -->
+  <DicomAttribute keyword="Modality" tag="00080060" vr="CS">
+    <Value number="1">OP</Value>
+  </DicomAttribute>
+  <DicomAttribute keyword="PatientName" tag="00100010" vr="PN">
+    <PersonName number="1">
+      <Alphabetic>
+        <FamilyName>PATIENT</FamilyName>
+        <GivenName>SAMPLE</GivenName>
+      </Alphabetic>
+    </PersonName>
+  </DicomAttribute>
+  <DicomAttribute keyword="PatientID" tag="00100020" vr="LO">
+    <Value number="1">PATIENT1234</Value>
+  </DicomAttribute>
+  <DicomAttribute keyword="PatientBirthDate" tag="00100030" vr="DA">
+    <Value number="1">20000201</Value>
+  </DicomAttribute>
+  <DicomAttribute keyword="PatientSex" tag="00100040" vr="CS">
+    <Value number="1">M</Value>
+  </DicomAttribute>
+  <DicomAttribute keyword="ReferencedRequestSequence" tag="0040A370" vr="SQ">
+    <Item number="1">
+      <DicomAttribute keyword="StudyInstanceUID" tag="0020000D" vr="UI">
+        <Value number="1">1.2.3.4.5</Value>
+      </DicomAttribute>
+      <DicomAttribute keyword="RequestingPhysician" tag="00321032" vr="PN">
+        <PersonName number="1">
+          <Alphabetic>
+            <FamilyName>DOCTOR</FamilyName>
+            <GivenName>REQUESTING</GivenName>
+          </Alphabetic>
+        </PersonName>
+      </DicomAttribute>
+      <DicomAttribute keyword="ReferringPhysicianName" tag="00080090" vr="PN">
+        <PersonName number="1">
+          <Alphabetic>
+            <FamilyName>DOCTOR</FamilyName>
+            <GivenName>REFERRING</GivenName>
+          </Alphabetic>
+        </PersonName>
+      </DicomAttribute>
+      <DicomAttribute keyword="RequestedProcedureDescription" tag="00321060" vr="LO">
+        <Value number="1">Take a picture of both eyes</Value>
+      </DicomAttribute>
+      <DicomAttribute keyword="RequestedProcedureId" tag="00401001" vr="SH">
+        <Value number="1">PROC1234</Value>
+      </DicomAttribute>
+      <DicomAttribute keyword="AccessionNumber" tag="00080050" vr="SH">
+        <Value number="1">ACC4321</Value>
+      </DicomAttribute>
+    </Item>
+  </DicomAttribute>
+  <DicomAttribute keyword="ScheduledProcedureStepSequence" tag="00400100" vr="SQ">
+    <Item number="1">
+      <DicomAttribute keyword="ScheduledProcedureStepStartDateTime" tag="00404005" vr="DT">
+        <!-- This one should be processed as both Date and Time. -->
+        <Value number="1">20200204101010</Value>
+      </DicomAttribute>
+    </Item>
+  </DicomAttribute>
+</NativeDicomModel>
+--BoUndaRy
+Content-Type: application/dicom+xml
+X-Other-Header: ignore-me
+
+<?xml version="1.0" encoding="UTF-8"?><NativeDicomModel xml:space="preserve">
+  <!-- This entry only contains a subset of supported tags. -->
+  <DicomAttribute keyword="Modality" tag="00080060" vr="CS">
+    <Value number="1">OPT</Value>
+  </DicomAttribute>
+  <DicomAttribute keyword="PatientName" tag="00100010" vr="PN">
+    <PersonName number="1">
+      <Alphabetic>
+        <FamilyName>DOE</FamilyName>
+        <GivenName>JANE</GivenName>
+      </Alphabetic>
+    </PersonName>
+  </DicomAttribute>
+  <DicomAttribute keyword="PatientID" tag="00100020" vr="LO">
+    <Value number="1">OTHERPATIENT123</Value>
+  </DicomAttribute>
+  <DicomAttribute keyword="PatientBirthDate" tag="00100030" vr="DA">
+    <Value number="1">19810408</Value>
+  </DicomAttribute>
+  <DicomAttribute keyword="PatientSex" tag="00100040" vr="CS">
+    <Value number="1">F</Value>
+  </DicomAttribute>
+  <DicomAttribute keyword="ReferencedRequestSequence" tag="0040A370" vr="SQ">
+    <Item number="1">
+      <DicomAttribute keyword="StudyInstanceUID" tag="0020000D" vr="UI">
+        <Value number="1">1.2.3.4.6</Value>
+      </DicomAttribute>
+    </Item>
+  </DicomAttribute>
+  <DicomAttribute keyword="ScheduledProcedureStepSequence" tag="00400100" vr="SQ">
+    <Item number="1">
+      <DicomAttribute keyword="ScheduledProcedureStepStartDateTime" tag="00404005" vr="DT">
+        <!-- This one should be processed as just Date without time. -->
+        <Value number="1">20200201</Value>
+      </DicomAttribute>
+    </Item>
+  </DicomAttribute>
+</NativeDicomModel>
+--BoUndaRy--

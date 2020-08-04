@@ -1,0 +1,54 @@
+// Copyright 2020 Google LLC
+//
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, you can obtain one at http://mozilla.org/MPL/2.0/.
+plugins {
+  id 'java'
+  id 'application'
+  // Allows auto-generation of eclipse project.
+  id 'eclipse'
+  // Use Google's ErrorProne compiler.
+  id 'net.ltgt.errorprone' version '1.1.1'
+}
+
+mainClassName = 'com.google.health.dicomproxy.Main'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://www.dcm4che.org/maven2'
+    }
+}
+
+dependencies {
+    // DICOM libraries.
+    implementation 'org.dcm4che:dcm4che-core:3.3.7'
+    implementation 'org.dcm4che:dcm4che-mime:3.3.7'
+    implementation 'org.dcm4che:dcm4che-net:3.3.7'
+
+    // Guava common libraries.
+    implementation 'com.google.guava:guava:21.0'
+
+    // Google OAuth / HTTP client libraries.
+    implementation 'com.google.api-client:google-api-client:1.22.0'
+    implementation 'com.google.http-client:google-http-client-jackson2:1.22.0'
+
+    // Error Prone annotation support.
+    errorprone 'com.google.errorprone:error_prone_core:2.3.4'
+    implementation 'com.google.errorprone:error_prone_core:2.3.4'
+
+    // Fluent JUnit assertions.
+    testImplementation 'junit:junit:4.1.3'
+    testImplementation 'com.google.truth:truth:1.0.1'
+}
+
+// Pass through system properties which start with com.google.health.dicomproxy.
+// Example: ./gradlew run -Dcom.google.health.dicomproxy.receive-port=12345
+run {
+    System.properties.each { k,v ->
+        if (k.startsWith('com.google.health.dicomproxy.')) {
+            systemProperty k, v
+        }
+    }
+}
